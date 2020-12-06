@@ -33,7 +33,7 @@ Processes:
 	3. Runnable : The process that is ready to start running
 	4. Sleeping : The process is blocked for an input or output
 	5. Zombie : The process that has terminated. It has finished executing but it is still in the process table. 
-	6. Unsued : The process is unused
+	6. Unused : The process is unused
 5. What is the function that does a context switch between two processes? swtch()
 6. Explain how the context switch function works (Note, this "function" *may* be in an assembly file). Context switching is when the cpu changes procesess.The way it works is that we push the old registers with the old tasks onto the stack. Then, we switch stacks and once we do so, we can then pop registers off that stack, allowing us to continue the new process. 
 
