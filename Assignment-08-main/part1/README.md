@@ -26,7 +26,7 @@ Processes:
 
 1. In which file does the the process table exist? proc.c
 2. What is the struct name of the process table? ptable
-3. When there is a context switch from one process to another, where are the values of the registers of the old process saved? *your answer here*
+3. When there is a context switch from one process to another, where are the values of the registers of the old process saved? The old process is being saved in the old stack. 
 4. What are the 6 possible states of a process?  Also, give a brief phrase describing the purpose of each state.
 	1. Running : The process is currently executing  
 	2. Embryo : The new process is being created
