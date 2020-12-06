@@ -24,23 +24,23 @@ Processes:
 
 ### Processes
 
-1. In which file does the the process table exist? *your answer here*
-2. What is the struct name of the process table? *your answer here*
+1. In which file does the the process table exist? proc.c
+2. What is the struct name of the process table? ptable
 3. When there is a context switch from one process to another, where are the values of the registers of the old process saved? *your answer here*
 4. What are the 6 possible states of a process?  Also, give a brief phrase describing the purpose of each state.
-	1. *your answer here*
-	2. *your answer here*
-	3. *your answer here*
-	4. *your answer here*
-	5. *your answer here*
-	6. *your answer here*
-5. What is the function that does a context switch between two processes? *your answer here*
-6. Explain how the context switch function works (Note, this "function" *may* be in an assembly file). *your answer here*
+	1. Running : The process is currently executing  
+	2. Embryo : The new process is being created
+	3. Runnable : The process that is ready to start running
+	4. Sleeping : The process is blocked for an input or output
+	5. Zombie : The process that has terminated. It has finished executing but it is still in the process table. 
+	6. Unsued : The process is unused
+5. What is the function that does a context switch between two processes? swtch()
+6. Explain how the context switch function works (Note, this "function" *may* be in an assembly file). Context switching is when the cpu changes procesess.The way it works is that we push the old registers with the old tasks onto the stack. Then, we switch stacks and once we do so, we can then pop registers off that stack, allowing us to continue the new process. 
 
 ### Process Startup and running
 
-1. What function from 'main.c' creates the first user process? *your answer here*
-2. Where do we actually start running processes in our code? That is, what is the actual function that has an infinite loop for running processes? *your answer here*
+1. What function from 'main.c' creates the first user process? userinit()
+2. Where do we actually start running processes in our code? That is, what is the actual function that has an infinite loop for running processes? scheduler()
 
 ### Files and File Descriptors:
 
@@ -51,16 +51,16 @@ offset into the file), to the i-node. Note: What I call a "file handle", UNIX xv
 
 1.  The function 'sys_open()' returns a file descriptor 'fd'. To do this, it opens a new file handle 'filealloc()', and it allocates a new file descriptor with 'fdalloc()'. Where is the file descriptor allocated?  
 	- Hint: You will see that the file descriptor is one entry in an array in an important struture you have already looked at.
-	- *your answer here*
+	- The file descriptor is located in the file sysfile.c. The line of code is allocated in "currproc -> ofile[fd]". 
 2. What is the algorithm used to choose which entry in the array to use for the new file descriptor?
     	- Note: The name 'NOFILE' means "file number".  "No." is sometimes used as an abbreviation for the word "number".
-	- *your answer here*
+	- The algorithm is a linear search that seraches through the file descriptor. It starts from the lowest entry in the table, and stops when it finds the first unused entry. 
 3.  As you saw above, the file descriptor turned out to be an index in an array.  What is the name of the array for which the file descriptor is an index?  Also, what is the type of one entry in that array.
-	- *your answer here*
+	- The name of the array is "ofile". The type of entry in that array is a file struct pointer. 
 4.  The type that you saw in the above question is what I was calling a "file handle" (with an offset into the file, etc.). What is the name of the field that holds the offset into the file? We saw it in the function 'sys_open()' (*hint, it's towards the bottom of the function*).
-	- *your answer here*
+	- The field is called "off" from "f-> off" where f is the struct. 
 5.  The file handle type was initialized to 'FD_INODE' in the sys_open function.  What are the other types that it could have been initialized to (*hint, look for the file struct*)?
-	- *your answer here*
+	- The other types that it could have been initialized to are FD_PIPE, and FD_NONE
     
 # Part 2 - Proc Priority modification
 
